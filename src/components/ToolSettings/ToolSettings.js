@@ -8,10 +8,11 @@ class ToolSettings extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleColorSelect = this.handleColorSelect.bind(this);
     this.elementsCollections = {
       colorSelect : (<ToolSettingsElement key="color"
                       name="color">
-                        <ColorPicker />
+                        <ColorPicker onSelect={this.handleColorSelect}/>
                     </ToolSettingsElement>),
       sizeSelect : (<ToolSettingsElement key="size"
                     name="size">
@@ -67,6 +68,10 @@ class ToolSettings extends React.Component {
     const property = event.target.id;
     const value = event.target.options[event.target.selectedIndex].value;
     this.props.onSelect(property, value);
+  }
+
+  handleColorSelect(color) {
+    this.props.onSelect('color', color);
   }
 
   render() {
