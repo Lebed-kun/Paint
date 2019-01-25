@@ -1,0 +1,31 @@
+.color-panel {
+  position: relative;
+}
+
+.hue-pen {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+}
+
+.hue-circle {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+}
+
+.lightness-panel {
+  position: relative;
+}
+
+.lightness-pen {
+  position: absolute;
+  z-index: 1;
+  left: 200px;
+}
+
+.lightness-bar {
+  position: absolute;
+  z-index: 0;
+  left: 200px;
+}
