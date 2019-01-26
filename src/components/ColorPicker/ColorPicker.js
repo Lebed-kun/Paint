@@ -31,8 +31,10 @@ class ColorPicker extends React.Component {
           Draw.drawPanel('.lightness-bar', LightnessBar);
 
           Draw.drawPen('.hue-pen', '.hue-circle', (contextPen, canvas) => {
-            contextPen.arc(canvas.width / 2, canvas.height / 2, 2, 0, 2 * Math.PI);
+            contextPen.beginPath();
+            contextPen.arc(canvas.width / 4, canvas.height / 4, 2, 0, 2 * Math.PI);
             contextPen.stroke();
+            contextPen.closePath();
           });
 
           Draw.drawPen('.lightness-pen', '.lightness-bar', (contextPen, canvas) => {
@@ -40,6 +42,14 @@ class ColorPicker extends React.Component {
           });
         } else {
           colorPanel.style.display = 'none';
+
+          Draw.drawPen('.hue-pen', '.hue-circle', (contextPen, canvas) => {
+            contextPen.clearRect(0, 0, canvas.width, canvas.height);
+          });
+
+          Draw.drawPen('.lightness-pen', '.lightness-bar', (contextPen, canvas) => {
+            contextPen.clearRect(0, 0, canvas.width, canvas.height);
+          });
         }
         break;
       case 'hue-pen':

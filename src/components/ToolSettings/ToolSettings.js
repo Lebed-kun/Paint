@@ -75,7 +75,7 @@ class ToolSettings extends React.Component {
   }
 
   render() {
-    const settings = this.toolSettings[this.props.tool];
+    const settings = this.toolSettings[this.props.toolName];
     return (
       <div className="ToolSettings">
         {settings}

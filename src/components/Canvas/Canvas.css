@@ -1,0 +1,20 @@
+.Canvas {
+  position:  relative;
+  top: 300px;
+
+  border: 1px solid black;
+}
+
+.pen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.draw-area {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}

@@ -55,11 +55,44 @@ function rgbToHsl(red, green, blue) {
   }
 }
 
+function draw(options) {
+  /*
+    options:
+      x - current x position
+      y - current y position
+      lastX - initial x position
+      lastY - initial y position
+      isDown - is mouse down
+      context - context of canvas
+      tool - current tool
+  */
+  if (options.isDown) {
+    const context = options.context;
+
+    switch(options.tool.toolName) {
+      case 'brush':
+        context.beginPath();
+        context.strokeStyle = options.tool.toolSettings.color;
+        context.lineWidth = options.tool.toolSettings.size;
+        context.lineJoin = 'round';
+        context.moveTo(options.lastX, options.lastY);
+        context.lineTo(options.x, options.y);
+        context.closePath();
+        context.stroke();
+        break;
+    }
+  }
+
+  options.lastX = options.x;
+  options.lastY = options.y;
+}
+
 const Draw = {
   drawPanel,
   drawPen,
   getMousePos,
-  rgbToHsl
+  rgbToHsl,
+  draw
 }
 
 export default Draw;

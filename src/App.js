@@ -31,17 +31,17 @@ class App extends Component {
       }
     }
     this.state = {
-      tool : 'brush',
+      toolName : 'brush',
       toolSettings : this.defaultToolSettings['brush']
     }
     this.selectTool = this.selectTool.bind(this);
     this.selectProperty = this.selectProperty.bind(this);
   }
 
-  selectTool(tool) {
+  selectTool(toolName) {
     this.setState({
-      tool : tool,
-      toolSettings : this.defaultToolSettings[tool]
+      toolName : toolName,
+      toolSettings : this.defaultToolSettings[toolName]
     });
   }
 
@@ -58,15 +58,16 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="App">
         <ToolBar
         onSelect={this.selectTool}
         />
         <MenuBar />
-        <Canvas />
+        <Canvas tool={this.state}/>
         <ToolSettings
-        tool={this.state.tool}
+        toolName={this.state.toolName}
         onSelect={this.selectProperty}/>
       </div>
     );
