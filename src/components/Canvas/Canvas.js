@@ -5,6 +5,12 @@ import Draw from '../../utils/draw';
 import { setOptions } from '../../utils/change_object';
 
 class Canvas extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { tool : this.props.tool };
+    this.initDrawing = this.initDrawing.bind(this);
+  }
+
   initDrawing() {
     const canvasPen = document.querySelector('.pen');
     const canvasDraw = document.querySelector('.draw-area');
@@ -24,7 +30,6 @@ class Canvas extends React.Component {
         y : mouseCoordinates.y,
         tool : this.props.tool
       });
-      console.log(options);
       Draw.draw(options);
     };
 

@@ -69,7 +69,7 @@ class ColorPicker extends React.Component {
           this.setState( { hue : hueSaturation.hue, saturation : hueSaturation.saturation });
 
           // Sending color value
-          this.props.onSelect(`hsl(${this.state.hue}, ${this.state.saturation}%, ${this.state.lightness}%)`);
+          this.props.onSelect(`hsl(${hueSaturation.hue}, ${hueSaturation.saturation}%, ${this.state.lightness}%)`);
         });
         break;
       case 'lightness-pen':
@@ -84,9 +84,8 @@ class ColorPicker extends React.Component {
           const lightness = Draw.rgbToHsl(data[0], data[1], data[2]).lightness;
 
           this.setState({ lightness : lightness });
-
           // Sending color value
-          this.props.onSelect(`hsl(${this.state.hue}, ${this.state.saturation}%, ${this.state.lightness}%)`);
+          this.props.onSelect(`hsl(${this.state.hue}, ${this.state.saturation}%, ${lightness}%)`);
         })
         break;
     }

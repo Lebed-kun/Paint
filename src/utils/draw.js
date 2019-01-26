@@ -1,3 +1,5 @@
+import Convert from './convert_units';
+
 function drawPanel(canvasSelector, imgSrc) {
   const canvas = document.querySelector(canvasSelector);
   const context = canvas.getContext('2d');
@@ -73,7 +75,7 @@ function draw(options) {
       case 'brush':
         context.beginPath();
         context.strokeStyle = options.tool.toolSettings.color;
-        context.lineWidth = options.tool.toolSettings.size;
+        context.lineWidth = Convert.pixelToDecimal(options.tool.toolSettings.size) / 2;
         context.lineJoin = 'round';
         context.moveTo(options.lastX, options.lastY);
         context.lineTo(options.x, options.y);

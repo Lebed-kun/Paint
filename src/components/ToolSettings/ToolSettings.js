@@ -18,11 +18,10 @@ class ToolSettings extends React.Component {
                     name="size">
                       <select id="size"
                       onChange={this.handleSelect}>
-                        <option value="4px" style={{fontSize : '0.25rem'}}>●</option>
-                        <option value="8px" style={{fontSize : '0.5rem'}}>●</option>
-                        <option value="12px" style={{fontSize : '1rem'}}>●</option>
-                        <option value="18px" style={{fontSize : '2rem'}}>●</option>
-                        <option value="24px" style={{fontSize : '4rem'}}>●</option>
+                        <option value="4px" style={{fontSize : '0.5rem'}}>●</option>
+                        <option value="8px" style={{fontSize : '1rem'}}>●</option>
+                        <option value="16px" style={{fontSize : '2rem'}}>●</option>
+                        <option value="32px" style={{fontSize : '4rem'}}>●</option>
                       </select>
                     </ToolSettingsElement>),
       fontSizeSelect : (<ToolSettingsElement key="fontSize"
