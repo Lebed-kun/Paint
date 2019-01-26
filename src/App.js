@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {
       toolName : 'brush',
       toolSettings : {
-        color : 'hsl(0, 0, 0)',
+        color : 'hsl(0, 0%, 0%)',
         size : '8px'
       }
     }

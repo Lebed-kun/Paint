@@ -9,7 +9,20 @@ class ToolSettings extends React.Component {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleColorSelect = this.handleColorSelect.bind(this);
-    this.elementsCollections = {
+  }
+
+  handleSelect(event) {
+    const property = event.target.id;
+    const value = event.target.options[event.target.selectedIndex].value;
+    this.props.onSelect(property, value);
+  }
+
+  handleColorSelect(color) {
+    this.props.onSelect('color', color);
+  }
+
+  getSettingComponents() {
+    const elementsCollection = {
       colorSelect : (<ToolSettingsElement key="color"
                       name="color">
                         <ColorPicker onSelect={this.handleColorSelect}
@@ -55,26 +68,24 @@ class ToolSettings extends React.Component {
                           </select>
                         </ToolSettingsElement>)
     };
-    this.toolSettings = {
-      'brush' : [this.elementsCollections.colorSelect, this.elementsCollections.sizeSelect],
-      'eraser' : [this.elementsCollections.sizeSelect],
-      'colorPicker' : [this.elementsCollections.colorSelect],
-      'text' : [this.elementsCollections.colorSelect,  this.elementsCollections.fontSizeSelect, this.elementsCollections.fontFamilySelect, this.elementsCollections.fontStyleSelect]
+
+    return elementsCollection;
+  }
+
+  getToolSettings(toolName) {
+    const settingComponents = this.getSettingComponents();
+    const toolSettings = {
+      'brush' : [settingComponents.colorSelect, settingComponents.sizeSelect],
+      'eraser' : [settingComponents.sizeSelect],
+      'colorPicker' : [settingComponents.colorSelect],
+      'text' : [settingComponents.colorSelect,  settingComponents.fontSizeSelect, settingComponents.fontFamilySelect, settingComponents.fontStyleSelect]
     };
-  }
 
-  handleSelect(event) {
-    const property = event.target.id;
-    const value = event.target.options[event.target.selectedIndex].value;
-    this.props.onSelect(property, value);
-  }
-
-  handleColorSelect(color) {
-    this.props.onSelect('color', color);
+    return toolSettings[toolName];
   }
 
   render() {
-    const settings = this.toolSettings[this.props.tool.toolName];
+    const settings = this.getToolSettings(this.props.tool.toolName);
     return (
       <div className="ToolSettings">
         {settings}
