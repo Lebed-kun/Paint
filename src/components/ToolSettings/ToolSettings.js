@@ -58,7 +58,6 @@ class ToolSettings extends React.Component {
       'brush' : [this.elementsCollections.colorSelect, this.elementsCollections.sizeSelect],
       'eraser' : [this.elementsCollections.sizeSelect],
       'colorPicker' : [this.elementsCollections.colorSelect],
-      'paint' : [this.elementsCollections.colorSelect],
       'text' : [this.elementsCollections.colorSelect,  this.elementsCollections.fontSizeSelect, this.elementsCollections.fontFamilySelect, this.elementsCollections.fontStyleSelect]
     };
   }

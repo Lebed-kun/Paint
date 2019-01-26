@@ -25,10 +25,11 @@ class Canvas extends React.Component {
     canvasPen.onmousedown = event => {
       const mouseCoordinates = Draw.getMousePos(canvasPen, event);
       mousePressed = true;
+      this.setState( { tool : this.props.tool });
       setOptions(options, {
         x : mouseCoordinates.x,
         y : mouseCoordinates.y,
-        tool : this.props.tool
+        tool : this.state.tool
       });
       Draw.draw(options);
     };

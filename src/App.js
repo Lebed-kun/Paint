@@ -11,20 +11,12 @@ class App extends Component {
     super(props);
     this.defaultToolSettings = {
       'brush' : {
-        color : 'hsl(0, 0, 0)',
         size : '12px'
       },
       'eraser' : {
         size : '12px'
       },
-      'colorPicker' : {
-        color : 'hsl(0, 0, 0)'
-      },
-      'paint' : {
-        color : 'hsl(0, 0, 0)'
-      },
       'text' : {
-        color : 'hsl(0, 0, 0)',
         fontSize : '0.75rem',
         fontFamily : 'Arial',
         fontWeight : "Normal"
@@ -32,16 +24,21 @@ class App extends Component {
     }
     this.state = {
       toolName : 'brush',
-      toolSettings : this.defaultToolSettings['brush']
+      toolSettings : {
+        color : 'hsl(0, 0, 0)',
+        size : '12px'
+      }
     }
     this.selectTool = this.selectTool.bind(this);
     this.selectProperty = this.selectProperty.bind(this);
   }
 
   selectTool(toolName) {
+    const defaultToolSettings = this.defaultToolSettings[toolName];
+
     this.setState({
       toolName : toolName,
-      toolSettings : this.defaultToolSettings[toolName]
+      toolSettings : defaultToolSettings || this.state.toolSettings
     });
   }
 

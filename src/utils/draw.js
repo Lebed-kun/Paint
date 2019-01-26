@@ -68,13 +68,23 @@ function draw(options) {
       context - context of canvas
       tool - current tool
   */
-  if (options.isDown) {
-    const context = options.context;
+  const context = options.context;
 
-    switch(options.tool.toolName) {
+  if (options.isDown) {
+    switch (options.tool.toolName) {
       case 'brush':
         context.beginPath();
         context.strokeStyle = options.tool.toolSettings.color;
+        context.lineWidth = Convert.pixelToDecimal(options.tool.toolSettings.size) / 2;
+        context.lineJoin = 'round';
+        context.moveTo(options.lastX, options.lastY);
+        context.lineTo(options.x, options.y);
+        context.closePath();
+        context.stroke();
+        break;
+      case 'eraser':
+        context.beginPath();
+        context.strokeStyle = 'white';
         context.lineWidth = Convert.pixelToDecimal(options.tool.toolSettings.size) / 2;
         context.lineJoin = 'round';
         context.moveTo(options.lastX, options.lastY);
@@ -87,6 +97,14 @@ function draw(options) {
 
   options.lastX = options.x;
   options.lastY = options.y;
+
+  switch (options.tool.toolName) {
+    case 'colorPicker':
+      const data = context.getImageData(options.lastX, options.lastY, 1, 1).data;
+      const hsl = rgbToHsl(data[0], data[1], data[2]);
+      options.tool.toolSettings.color = `hsl(${hsl.hue}, ${hsl.saturation}%, ${hsl.lightness}%)`;
+      break;
+  }
 }
 
 const Draw = {

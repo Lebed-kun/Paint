@@ -48,16 +48,6 @@ class ToolBar extends React.Component {
         iconSrc={ColorPickerIcon}
         tool="colorPicker"
         active={this.isToolActive('colorPicker')}/>
-        <ToolBarElement
-        onClick={this.handleClick}
-        iconSrc={PaintIcon}
-        tool="paint"
-        active={this.isToolActive('paint')}/>
-        <ToolBarElement
-        onClick={this.handleClick}
-        iconSrc={TextIcon}
-        tool="text"
-        active={this.isToolActive('text')}/>
       </div>
     )
   }
