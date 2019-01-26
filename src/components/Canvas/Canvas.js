@@ -32,6 +32,9 @@ class Canvas extends React.Component {
         tool : this.state.tool
       });
       Draw.draw(options);
+
+      if (options.tool.toolName == 'colorPicker')
+        this.props.onSelect('color', options.tool.toolSettings.color);
     };
 
     canvasPen.onmousemove = event => {

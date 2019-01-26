@@ -69,7 +69,7 @@ class ColorPicker extends React.Component {
           this.setState( { hue : hueSaturation.hue, saturation : hueSaturation.saturation });
 
           // Sending color value
-          this.props.onSelect(`hsl(${hueSaturation.hue}, ${hueSaturation.saturation}%, ${this.state.lightness}%)`);
+          this.props.onSelect(Draw.formatColor(hueSaturation.hue, hueSaturation.saturation, this.state.lightness));
         });
         break;
       case 'lightness-pen':
@@ -85,7 +85,7 @@ class ColorPicker extends React.Component {
 
           this.setState({ lightness : lightness });
           // Sending color value
-          this.props.onSelect(`hsl(${this.state.hue}, ${this.state.saturation}%, ${lightness}%)`);
+          this.props.onSelect(Draw.formatColor(this.state.hue, this.state.saturation, lightness))
         })
         break;
     }
@@ -93,13 +93,15 @@ class ColorPicker extends React.Component {
 
 
   render() {
+    const color = Draw.formatColor(this.state.hue, this.state.saturation, this.state.lightness);
+
     return (
       <div className="ColorPicker">
         <div id="show-panel" onClick={this.handleClick}
         style={{
           width : '20px',
           height : '10px',
-          backgroundColor : `hsl(${this.state.hue}, ${this.state.saturation}%, ${this.state.lightness}%)`
+          backgroundColor : color
         }}></div>
         <div className="color-panel" style={{display : 'none'}}>
           <div className="hue-panel">

@@ -107,12 +107,17 @@ function draw(options) {
   }
 }
 
+function formatColor(hue, saturation, lightness) {
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
+
 const Draw = {
   drawPanel,
   drawPen,
   getMousePos,
   rgbToHsl,
-  draw
+  draw,
+  formatColor
 }
 
 export default Draw;

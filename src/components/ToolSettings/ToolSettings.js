@@ -12,7 +12,8 @@ class ToolSettings extends React.Component {
     this.elementsCollections = {
       colorSelect : (<ToolSettingsElement key="color"
                       name="color">
-                        <ColorPicker onSelect={this.handleColorSelect}/>
+                        <ColorPicker onSelect={this.handleColorSelect}
+                        color={this.props.tool.toolSettings.color}/>
                     </ToolSettingsElement>),
       sizeSelect : (<ToolSettingsElement key="size"
                     name="size">
@@ -73,7 +74,7 @@ class ToolSettings extends React.Component {
   }
 
   render() {
-    const settings = this.toolSettings[this.props.toolName];
+    const settings = this.toolSettings[this.props.tool.toolName];
     return (
       <div className="ToolSettings">
         {settings}

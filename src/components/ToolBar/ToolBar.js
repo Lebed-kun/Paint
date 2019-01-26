@@ -6,8 +6,6 @@ import ToolBarElement from '../ToolBarElement/ToolBarElement';
 import BrushIcon from '../../resources/ToolBarIcons/brush.png';
 import EraserIcon from '../../resources/ToolBarIcons/eraser.png';
 import ColorPickerIcon from '../../resources/ToolBarIcons/color-picker.png';
-import TextIcon from '../../resources/ToolBarIcons/text.png';
-import PaintIcon from '../../resources/ToolBarIcons/paint.png';
 
 class ToolBar extends React.Component {
   constructor(props) {

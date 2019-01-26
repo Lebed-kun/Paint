@@ -6,27 +6,16 @@ import MenuBar from './components/MenuBar/MenuBar';
 import Canvas from './components/Canvas/Canvas';
 import ToolSettings from './components/ToolSettings/ToolSettings';
 
+import { setOptions } from './utils/change_object';
+
 class App extends Component {
   constructor(props) {
     super(props);
-    this.defaultToolSettings = {
-      'brush' : {
-        size : '12px'
-      },
-      'eraser' : {
-        size : '12px'
-      },
-      'text' : {
-        fontSize : '0.75rem',
-        fontFamily : 'Arial',
-        fontWeight : "Normal"
-      }
-    }
     this.state = {
       toolName : 'brush',
       toolSettings : {
         color : 'hsl(0, 0, 0)',
-        size : '12px'
+        size : '8px'
       }
     }
     this.selectTool = this.selectTool.bind(this);
@@ -34,11 +23,8 @@ class App extends Component {
   }
 
   selectTool(toolName) {
-    const defaultToolSettings = this.defaultToolSettings[toolName];
-
     this.setState({
-      toolName : toolName,
-      toolSettings : defaultToolSettings || this.state.toolSettings
+      toolName : toolName
     });
   }
 
@@ -61,9 +47,10 @@ class App extends Component {
         onSelect={this.selectTool}
         />
         <MenuBar />
-        <Canvas tool={this.state}/>
+        <Canvas tool={this.state}
+        onSelect={this.selectProperty}/>
         <ToolSettings
-        toolName={this.state.toolName}
+        tool={this.state}
         onSelect={this.selectProperty}/>
       </div>
     );
