@@ -16,7 +16,7 @@ export function initDrawing(options) {
   let drawOptions = {
     isDown : false,
     context : context,
-    tool : component.state.tool
+    tool : component.props.tool
   };
   let mousePressed = false;
 
@@ -29,7 +29,7 @@ export function initDrawing(options) {
       canvasPen : canvasPen,
       event : event,
       drawOptions : drawOptions,
-      extraDrawOptions : { tool : component.state.tool }
+      extraDrawOptions : { tool : component.props.tool }
     });
 
     if (drawOptions.tool.toolName == 'colorPicker')

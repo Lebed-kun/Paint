@@ -91,7 +91,7 @@ function handleDrawing(options) {
 
 function handlePenMoving(options) {
   const mouseCoordinates = getMousePos(options.canvasPen, options.event); // 1
-  let size = options.component.state.tool.toolSettings.size;
+  let size = options.component.props.tool.toolSettings.size;
 
   options.context.clearRect(0, 0, options.canvasPen.width, options.canvasPen.height);
   options.context.beginPath();

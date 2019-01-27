@@ -41,7 +41,7 @@ const ChooseColorHelper = {
     });
   },
 
-  drawLightnessBar : (lightnessPenClass, lightnessBarSelector) => {
+  drawLightnessPen : (lightnessPenClass, lightnessBarSelector) => {
     Draw.drawPen(`.${lightnessPenClass}`, lightnessBarSelector, (contextPen, canvas) => {
       contextPen.strokeRect(0, 0, canvas.width, 3);
     });

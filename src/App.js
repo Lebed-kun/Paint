@@ -22,6 +22,7 @@ class App extends Component {
     this.selectTool = this.selectTool.bind(this);
     this.selectProperty = this.selectProperty.bind(this);
     this.selectCommand = this.selectCommand.bind(this);
+    this.selectImage = this.selectImage.bind(this);
   }
 
   selectTool(toolName) {
@@ -46,6 +47,10 @@ class App extends Component {
     this.setState({ command : command });
   }
 
+  selectImage(imageData) {
+    this.setState({ image : imageData });
+  }
+
   render() {
     return (
       <div className="App">
@@ -53,11 +58,13 @@ class App extends Component {
         onSelect={this.selectTool}
         />
         <MenuBar
-        onSelect={this.selectCommand}/>
+        onSelect={this.selectCommand}
+        onSelectImage={this.selectImage}/>
         <Canvas tool={this.state}
         onSelect={this.selectProperty}
         command={this.state.command}
-        onSelectCommand={this.selectCommand}/>
+        onSelectCommand={this.selectCommand}
+        />
         <ToolSettings
         tool={this.state}
         onSelect={this.selectProperty}/>

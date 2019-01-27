@@ -21,7 +21,8 @@ class MenuBar extends React.Component {
         onSelect={this.handleSelect}/>
         <MenuBarElement
         command="import"
-        onSelect={this.handleSelect}/>
+        onSelect={this.handleSelect}
+        onSelectImage={this.props.onSelectImage}/>
         <MenuBarElement
         command="export"
         onSelect={this.handleSelect}/>

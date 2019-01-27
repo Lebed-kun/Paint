@@ -34,7 +34,7 @@ export function chooseColor(options) {
         Draw.drawPanel(lightnessBarSelector, lightnessBarImage);
 
         ChooseColorHelper.drawHuePen(huePenClass, hueCircleSelector);
-        ChooseColorHelper.drawLightnessBar(lightnessPenClass, lightnessBarSelector);
+        ChooseColorHelper.drawLightnessPen(lightnessPenClass, lightnessBarSelector);
       } else {
         colorPanel.style.display = 'none';
 
