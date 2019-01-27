@@ -2,6 +2,11 @@ import Draw from './draw';
 import { setOptions } from './change_object';
 import Convert from './convert_units';
 
+function fillCanvas(canvas, context) {
+  context.fillStyle = 'white';
+  context.fillRect(0, 0, canvas.width, canvas.height);
+}
+
 export function initDrawing(options) {
   /* canvasPenSelector, canvasDrawSelector, component */
   const canvasPen = document.querySelector(options.canvasPenSelector);
@@ -14,6 +19,8 @@ export function initDrawing(options) {
     tool : component.state.tool
   };
   let mousePressed = false;
+
+  fillCanvas(canvasDraw, context);
 
   canvasPen.onmousedown = event => {
     mousePressed = true;
@@ -63,8 +70,7 @@ export function initPen(options) {
 
   canvasPen.addEventListener('mouseenter', event => {
     mouseOver = true;
-    component.setState( { tool : component.props.tool });
-
+    component.handleSelectCommand('draw');
     Draw.handlePenMoving({
       canvasPen : canvasPen,
       event : event,

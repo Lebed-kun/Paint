@@ -7,6 +7,11 @@ class Canvas extends React.Component {
   constructor(props) {
     super(props);
     this.state = { tool : this.props.tool };
+    this.handleSelectCommand = this.handleSelectCommand.bind(this);
+  }
+
+  handleSelectCommand(command) {
+    this.props.onSelectCommand(command);
   }
 
   componentDidMount() {
@@ -19,6 +24,22 @@ class Canvas extends React.Component {
       canvasPenSelector : '.pen',
       component : this
     });
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.command !== prevProps.command) {
+      console.log(prevProps.command);
+      console.log(this.props.command);
+
+      switch (this.props.command) {
+        case 'clear':
+          break;
+        case 'import':
+          break;
+        case 'export':
+          break;
+      }
+    }
   }
 
   render() {

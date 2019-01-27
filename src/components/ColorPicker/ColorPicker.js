@@ -50,7 +50,8 @@ class ColorPicker extends React.Component {
         style={{
           width : '20px',
           height : '10px',
-          backgroundColor : this.props.color
+          backgroundColor : this.props.color,
+          border : '1px solid black'
         }} className="show-panel"></div>
         <div className="color-panel" style={{display : 'none'}}>
           <div className="hue-panel">

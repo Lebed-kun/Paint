@@ -16,10 +16,12 @@ class App extends Component {
       toolSettings : {
         color : 'hsl(0, 0%, 0%)',
         size : '8px'
-      }
+      },
+      command : 'draw'
     }
     this.selectTool = this.selectTool.bind(this);
     this.selectProperty = this.selectProperty.bind(this);
+    this.selectCommand = this.selectCommand.bind(this);
   }
 
   selectTool(toolName) {
@@ -40,15 +42,22 @@ class App extends Component {
     this.setState({ toolSettings : newSettings });
   }
 
+  selectCommand(command) {
+    this.setState({ command : command });
+  }
+
   render() {
     return (
       <div className="App">
         <ToolBar
         onSelect={this.selectTool}
         />
-        <MenuBar />
+        <MenuBar
+        onSelect={this.selectCommand}/>
         <Canvas tool={this.state}
-        onSelect={this.selectProperty}/>
+        onSelect={this.selectProperty}
+        command={this.state.command}
+        onSelectCommand={this.selectCommand}/>
         <ToolSettings
         tool={this.state}
         onSelect={this.selectProperty}/>
