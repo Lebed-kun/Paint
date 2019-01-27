@@ -1,9 +1,9 @@
 import Draw from './draw';
 import { setOptions } from './change_object';
+import Convert from './convert_units';
 
 export function initDrawing(options) {
   /* canvasPenSelector, canvasDrawSelector, component */
-
   const canvasPen = document.querySelector(options.canvasPenSelector);
   const canvasDraw = document.querySelector(options.canvasDrawSelector);
   const context = canvasDraw.getContext('2d');
@@ -16,15 +16,14 @@ export function initDrawing(options) {
   let mousePressed = false;
 
   canvasPen.onmousedown = event => {
-    const mouseCoordinates = Draw.getMousePos(canvasPen, event);
     mousePressed = true;
-    component.setState( { tool : component.props.tool });
-    setOptions(drawOptions, {
-      x : mouseCoordinates.x,
-      y : mouseCoordinates.y,
-      tool : component.state.tool
+
+    Draw.handleDrawing({
+      canvasPen : canvasPen,
+      event : event,
+      drawOptions : drawOptions,
+      extraDrawOptions : { tool : component.state.tool }
     });
-    Draw.draw(drawOptions);
 
     if (drawOptions.tool.toolName == 'colorPicker')
       component.props.onSelect('color', drawOptions.tool.toolSettings.color);
@@ -32,13 +31,12 @@ export function initDrawing(options) {
 
   canvasPen.onmousemove = event => {
     if (mousePressed) {
-      const mouseCoordinates = Draw.getMousePos(canvasPen, event);
-      setOptions(drawOptions, {
-        x : mouseCoordinates.x,
-        y : mouseCoordinates.y,
-        isDown : true
+      Draw.handleDrawing({
+        canvasPen : canvasPen,
+        event : event,
+        drawOptions : drawOptions,
+        extraDrawOptions : { isDown : true }
       });
-      Draw.draw(drawOptions);
     }
   }
 
@@ -55,4 +53,39 @@ export function initDrawing(options) {
       isDown : false
     });
   }
+}
+
+export function initPen(options) {
+  const canvasPen = document.querySelector(options.canvasPenSelector);
+  const context = canvasPen.getContext('2d');
+  const component = options.component;
+  let mouseOver = false;
+
+  canvasPen.addEventListener('mouseenter', event => {
+    mouseOver = true;
+    component.setState( { tool : component.props.tool });
+
+    Draw.handlePenMoving({
+      canvasPen : canvasPen,
+      event : event,
+      component : component,
+      context : context
+    });
+  });
+
+  canvasPen.addEventListener('mousemove', event => {
+    if (mouseOver) {
+      Draw.handlePenMoving({
+        canvasPen : canvasPen,
+        event : event,
+        component : component,
+        context : context
+      });
+    }
+  });
+
+  canvasPen.addEventListener('mouseleave', event => {
+    mouseOver = false;
+    context.clearRect(0, 0, canvasPen.width, canvasPen.height);
+  })
 }

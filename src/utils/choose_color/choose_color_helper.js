@@ -1,7 +1,7 @@
 import Draw from '../draw';
 import Convert from '../convert_units';
 
-function setHslProperties(options, props, movePen) {
+function setHslProperties(options, props, drawPen) {
   // Set up options
   const contextPen = options.contextPen;
   const canvas = options.canvas;
@@ -27,7 +27,8 @@ function setHslProperties(options, props, movePen) {
   component.props.onSelect(showColor);
 
   // Moving pointer
-  movePen(contextPen, canvas, clickCoordinates);
+  contextPen.clearRect(0, 0, canvas.width, canvas.height);
+  drawPen(contextPen, canvas, clickCoordinates);
 };
 
 const ChooseColorHelper = {
@@ -58,7 +59,6 @@ const ChooseColorHelper = {
       'saturation' : true
     }, (contextPen, canvas, clickCoordinates) => {
       // Moving hue-staruration pointer
-      contextPen.clearRect(0, 0, canvas.width, canvas.height);
       contextPen.beginPath();
       contextPen.arc(clickCoordinates.x, clickCoordinates.y, 2, 0, 2 * Math.PI);
       contextPen.stroke();
@@ -69,7 +69,6 @@ const ChooseColorHelper = {
   setLightness : options => {
     setHslProperties(options, { 'lightness' : true }, (contextPen, canvas, clickCoordinates) => {
       // Moving lightness pointer
-      contextPen.clearRect(0, 0, canvas.width, canvas.height);
       contextPen.strokeRect(0, clickCoordinates.y, canvas.width, 3);
     });
   }

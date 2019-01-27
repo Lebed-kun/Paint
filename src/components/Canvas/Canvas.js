@@ -1,7 +1,7 @@
 import React from 'react';
 import './Canvas.css';
 
-import { initDrawing } from '../../utils/init_drawing';
+import { initDrawing, initPen } from '../../utils/init_drawing';
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -13,6 +13,10 @@ class Canvas extends React.Component {
     initDrawing({
       canvasPenSelector : '.pen',
       canvasDrawSelector : '.draw-area',
+      component : this
+    });
+    initPen({
+      canvasPenSelector : '.pen',
       component : this
     });
   }

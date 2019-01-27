@@ -1,4 +1,5 @@
 import Convert from './convert_units';
+import { setOptions } from './change_object';
 
 const Helper = {
   drawWithBrush : (options, context, isEraser) => {
@@ -78,11 +79,37 @@ function draw(options) {
   }
 }
 
+function handleDrawing(options) {
+  const mouseCoordinates = getMousePos(options.canvasPen, options.event);
+  setOptions(options.drawOptions, {
+    x : mouseCoordinates.x,
+    y : mouseCoordinates.y
+  });
+  setOptions(options.drawOptions, options.extraDrawOptions);
+  draw(options.drawOptions);
+}
+
+function handlePenMoving(options) {
+  const mouseCoordinates = getMousePos(options.canvasPen, options.event); // 1
+  let size = options.component.state.tool.toolSettings.size;
+
+  options.context.clearRect(0, 0, options.canvasPen.width, options.canvasPen.height);
+  options.context.beginPath();
+
+  size = size ? Convert.pixelToDecimal(size) / 4 : 1;
+  options.context.arc(mouseCoordinates.x, mouseCoordinates.y, size, 0, 2 * Math.PI);
+
+  options.context.stroke();
+  options.context.closePath();
+}
+
 const Draw = {
   drawPanel,
   drawPen,
   getMousePos,
-  draw
+  draw,
+  handleDrawing,
+  handlePenMoving
 }
 
 export default Draw;
