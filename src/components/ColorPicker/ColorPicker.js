@@ -4,7 +4,7 @@ import './ColorPicker.css';
 import  ColorCircle  from '../../resources/ColorPicker/color-circle.png';
 import  LightnessBar  from '../../resources/ColorPicker/grey-bar.png';
 
-import Draw from '../../utils/draw';
+import { chooseColor } from '../../utils/choose_color/choose_color';
 
 class ColorPicker extends React.Component {
   constructor(props) {
@@ -19,79 +19,27 @@ class ColorPicker extends React.Component {
   }
 
   handleClick(event) {
-    const id = event.target.id;
+    const clickableClass = event.target.className;
 
-    switch (id) {
-      case 'show-panel':
-        const colorPanel = document.querySelector('.color-panel');
-        if (colorPanel.style.display === 'none') {
-          colorPanel.style.display = 'block';
-
-          Draw.drawPanel('.hue-circle', ColorCircle);
-          Draw.drawPanel('.lightness-bar', LightnessBar);
-
-          Draw.drawPen('.hue-pen', '.hue-circle', (contextPen, canvas) => {
-            contextPen.beginPath();
-            contextPen.arc(canvas.width / 4, canvas.height / 4, 2, 0, 2 * Math.PI);
-            contextPen.stroke();
-            contextPen.closePath();
-          });
-
-          Draw.drawPen('.lightness-pen', '.lightness-bar', (contextPen, canvas) => {
-            contextPen.strokeRect(0, 0, canvas.width, 3);
-          });
-        } else {
-          colorPanel.style.display = 'none';
-
-          Draw.drawPen('.hue-pen', '.hue-circle', (contextPen, canvas) => {
-            contextPen.clearRect(0, 0, canvas.width, canvas.height);
-          });
-
-          Draw.drawPen('.lightness-pen', '.lightness-bar', (contextPen, canvas) => {
-            contextPen.clearRect(0, 0, canvas.width, canvas.height);
-          });
-        }
-        break;
-      case 'hue-pen':
-        Draw.drawPen('.hue-pen', '.hue-circle', (contextPen, canvas) => {
-          // Moving hue-staruration pointer
-          contextPen.clearRect(0, 0, canvas.width, canvas.height);
-          const clickCoordinates = Draw.getMousePos(canvas, event);
-          contextPen.beginPath();
-          contextPen.arc(clickCoordinates.x, clickCoordinates.y, 2, 0, 2 * Math.PI);
-          contextPen.stroke();
-          contextPen.closePath();
-
-          // Getting hue and saturation values
-          const data = canvas.getContext('2d').getImageData(clickCoordinates.x, clickCoordinates.y, 1, 1).data;
-          const hueSaturation = Draw.rgbToHsl(data[0], data[1], data[2]);
-
-          const showColor = Draw.formatColor(hueSaturation.hue, hueSaturation.saturation, this.state.lightness);
-
-          this.setState( { hue : hueSaturation.hue, saturation : hueSaturation.saturation});
-
-          // Sending color value
-          this.props.onSelect(showColor);
-        });
-        break;
-      case 'lightness-pen':
-        Draw.drawPen('.lightness-pen', '.lightness-bar', (contextPen, canvas) => {
-          // Moving lightness pointer
-          contextPen.clearRect(0, 0, canvas.width, canvas.height);
-          const clickCoordinates = Draw.getMousePos(canvas, event);
-          contextPen.strokeRect(0, clickCoordinates.y, canvas.width, 3);
-
-          // Getting lightness value
-          const data = canvas.getContext('2d').getImageData(clickCoordinates.x, clickCoordinates.y, 1, 1).data;
-          const lightness = Draw.rgbToHsl(data[0], data[1], data[2]).lightness;
-
-          const showColor = Draw.formatColor(this.state.hue, this.state.saturation, lightness);
-          this.setState({ lightness : lightness });
-          // Sending color value
-          this.props.onSelect(showColor)
-        })
-        break;
-    }
+    chooseColor({
+      clickableClass : clickableClass,
+      colorPickerClasses : {
+        showPanelClass : 'show-panel',
+        huePenClass : 'hue-pen',
+        lightnessPenClass : 'lightness-pen'
+      },
+      colorPanelSelector : '.color-panel',
+      colorPickerPlanes : {
+        hueCircleSelector : '.hue-circle',
+        lightnessBarSelector : '.lightness-bar'
+      },
+      colorPickerImages : {
+        hueCircleImage : ColorCircle,
+        lightnessBarImage : LightnessBar
+      },
+      component : this,
+      event : event
+    });
   }
 
 
@@ -103,7 +51,7 @@ class ColorPicker extends React.Component {
           width : '20px',
           height : '10px',
           backgroundColor : this.props.color
-        }}></div>
+        }} className="show-panel"></div>
         <div className="color-panel" style={{display : 'none'}}>
           <div className="hue-panel">
             <canvas id="hue-pen" className="hue-pen"
