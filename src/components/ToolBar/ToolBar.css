@@ -1,0 +1,7 @@
+.ToolBar {
+  width: 2rem;
+  margin-left: 2rem;
+
+  display: inline-flex;
+  flex-direction: column;
+}

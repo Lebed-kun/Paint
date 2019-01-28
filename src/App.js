@@ -6,8 +6,6 @@ import MenuBar from './components/MenuBar/MenuBar';
 import Canvas from './components/Canvas/Canvas';
 import ToolSettings from './components/ToolSettings/ToolSettings';
 
-import { setOptions } from './utils/change_object';
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -54,21 +52,23 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ToolBar
-        onSelect={this.selectTool}
-        />
         <MenuBar
         onSelect={this.selectCommand}
         onSelectImage={this.selectImage}/>
-        <Canvas tool={this.state}
-        onSelect={this.selectProperty}
-        command={this.state.command}
-        onSelectCommand={this.selectCommand}
-        image={this.state.image}
-        />
-        <ToolSettings
-        tool={this.state}
-        onSelect={this.selectProperty}/>
+        <div className="row-1">
+          <ToolBar
+          onSelect={this.selectTool}
+          />
+          <Canvas tool={this.state}
+          onSelect={this.selectProperty}
+          command={this.state.command}
+          onSelectCommand={this.selectCommand}
+          image={this.state.image}
+          />
+          <ToolSettings
+          tool={this.state}
+          onSelect={this.selectProperty}/>
+        </div>
       </div>
     );
   }
