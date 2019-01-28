@@ -47,9 +47,9 @@ class Canvas extends React.Component {
   render() {
     return (
       <div className="Canvas">
-        <canvas id="pen" className="pen" width="640px" height="6400px">
+        <canvas id="pen" className="pen" width="800px" height="6400px">
         </canvas>
-        <canvas id="draw-area" className="draw-area" width="640px" height="640px">
+        <canvas id="draw-area" className="draw-area" width="800px" height="640px">
         </canvas>
       </div>
     )
