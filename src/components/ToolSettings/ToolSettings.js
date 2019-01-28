@@ -25,11 +25,13 @@ class ToolSettings extends React.Component {
     const elementsCollection = {
       colorSelect : (<ToolSettingsElement key="color"
                       name="color">
+                        <span>Color:</span>
                         <ColorPicker onSelect={this.handleColorSelect}
                         color={this.props.tool.toolSettings.color}/>
                     </ToolSettingsElement>),
       sizeSelect : (<ToolSettingsElement key="size"
                     name="size">
+                      <span>Size:</span>
                       <select id="size"
                       onChange={this.handleSelect}>
                         <option value="4px" style={{fontSize : '0.5rem'}}>●</option>

@@ -1,5 +1,14 @@
+
+
+.show-panel {
+  width : 100%;
+  height : 1rem;
+  border : 1px solid black;
+}
+
 .color-panel {
   position: relative;
+  background-color: black;
 }
 
 .hue-pen {
