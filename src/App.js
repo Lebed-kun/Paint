@@ -64,6 +64,7 @@ class App extends Component {
         onSelect={this.selectProperty}
         command={this.state.command}
         onSelectCommand={this.selectCommand}
+        image={this.state.image}
         />
         <ToolSettings
         tool={this.state}
