@@ -4,6 +4,7 @@ import './Canvas.css';
 import { initDrawing, initPen } from '../../utils/init_drawing';
 import { clearCanvas } from '../../utils/clear_canvas';
 import { importImage } from '../../utils/import_image';
+import { exportImage } from '../../utils/export_image';
 
 class Canvas extends React.Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class Canvas extends React.Component {
           importImage('.draw-area', this.props.image);
           break;
         case 'export':
+          exportImage('.draw-area');
           break;
       }
     }

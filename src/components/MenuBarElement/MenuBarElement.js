@@ -7,6 +7,7 @@ class MenuBarElement extends React.Component {
     this.handleClickClear = this.handleClickClear.bind(this);
     this.openFileDialog = this.openFileDialog.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.downloadImage = this.downloadImage.bind(this);
   }
 
   chooseMenuComponent() {
@@ -24,10 +25,15 @@ class MenuBarElement extends React.Component {
           </div>)
         break;
       case 'export':
+        menuComponent = (<div onClick={this.downloadImage}>{this.props.command}</div>);
         break;
     }
 
     return menuComponent;
+  }
+
+  downloadImage() {
+    this.props.onSelect('export');
   }
 
   openFileDialog() {
