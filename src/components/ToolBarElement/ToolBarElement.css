@@ -1,5 +1,7 @@
 .ToolBarElement {
   width: 100%;
+
+  cursor: pointer;
 }
 
 .ToolBarElement img {

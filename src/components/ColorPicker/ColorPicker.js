@@ -59,7 +59,7 @@ class ColorPicker extends React.Component {
             width="200px" height="200px"
             onClick={this.handleClick}></canvas>
             <canvas id="hue-circle" className="hue-circle"
-            width="400px" height="400px"></canvas>
+            width="200px" height="200px"></canvas>
           </div>
           <div className="lightness-panel">
             <canvas id="lightness-pen" className="lightness-pen"

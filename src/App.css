@@ -1,11 +1,13 @@
 .App {
   width: 66.67%;
   margin: 3rem auto;
-  padding-top: 2rem;
+  padding-top: 1rem;
 
   background-color: #35a1b2;
 
   position: relative;
+
+  padding-bottom: 2rem;
 }
 
 .App .row-1 {

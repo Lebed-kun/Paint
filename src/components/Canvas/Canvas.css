@@ -1,8 +1,9 @@
 .Canvas {
   position: relative;
-  width: 80%;
-  height: 10rem;
   overflow: hidden;
+  width: 100%;
+
+  height: 30rem;
 }
 
 .pen {
@@ -10,13 +11,9 @@
   left: 0;
   top: 0;
   z-index: 1;
-
-  width: 100%;
 }
 
 .draw-area {
-  width: 100%;
-
   position: absolute;
   left: 0;
   top: 0;

@@ -35,7 +35,7 @@ const ChooseColorHelper = {
   drawHuePen : (huePenClass, hueCircleSelector) => {
     Draw.drawPen(`.${huePenClass}`, hueCircleSelector, (contextPen, canvas) => {
       contextPen.beginPath();
-      contextPen.arc(canvas.width / 4, canvas.height / 4, 2, 0, 2 * Math.PI);
+      contextPen.arc(canvas.width / 2, canvas.height / 2, 2, 0, 2 * Math.PI);
       contextPen.stroke();
       contextPen.closePath();
     });
@@ -63,6 +63,10 @@ const ChooseColorHelper = {
       contextPen.arc(clickCoordinates.x, clickCoordinates.y, 2, 0, 2 * Math.PI);
       contextPen.stroke();
       contextPen.closePath();
+
+      console.log(contextPen);
+      console.log(canvas);
+      console.log(clickCoordinates);
     });
   },
 
