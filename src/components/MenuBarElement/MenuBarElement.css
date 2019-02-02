@@ -1,5 +1,10 @@
 .MenuBarElement {
   margin: 0 1rem;
+  margin-bottom: 1rem;
 
   cursor: pointer;
+}
+
+.MenuBarElement:hover {
+  color: white;
 }
