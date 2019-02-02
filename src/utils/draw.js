@@ -1,18 +1,9 @@
 import Convert from './convert_units';
 import { setOptions } from './change_object';
+import { getMousePos } from './get_mouse_pos';
 
-const Helper = {
-  drawWithBrush : (options, context, isEraser) => {
-    context.beginPath();
-    context.strokeStyle = !isEraser ? options.tool.toolSettings.color : 'white';
-    context.lineWidth = Convert.pixelToDecimal(options.tool.toolSettings.size) / 2;
-    context.lineJoin = 'round';
-    context.moveTo(options.lastX, options.lastY);
-    context.lineTo(options.x, options.y);
-    context.closePath();
-    context.stroke();
-  }
-}
+import { drawBrush } from './paint_tools/brush';
+import { pickColor } from './paint_tools/color_picker';
 
 function drawPanel(canvasSelector, imgSrc) {
   const canvas = document.querySelector(canvasSelector);
@@ -35,14 +26,6 @@ function drawPen(canvasPenSelector, canvasSelector, drawFunction) {
   drawFunction(contextPen, canvas);
 }
 
-function getMousePos(canvas, event) {
-  const rectangle = canvas.getBoundingClientRect();
-  return {
-    x : event.clientX - rectangle.left,
-    y : event.clientY - rectangle.top
-  }
-}
-
 function draw(options) {
   /*
     options:
@@ -51,18 +34,17 @@ function draw(options) {
       lastX - initial x position
       lastY - initial y position
       isDown - is mouse down
+      canvasDraw - canvas for drawing
       context - context of canvas
       tool - current tool
   */
-  const context = options.context;
-
   if (options.isDown) {
     switch (options.tool.toolName) {
       case 'brush':
-        Helper.drawWithBrush(options, context);
+        drawBrush(options);
         break;
       case 'eraser':
-        Helper.drawWithBrush(options, context, true);
+        drawBrush(options, true);
         break;
     }
   }
@@ -72,9 +54,7 @@ function draw(options) {
 
   switch (options.tool.toolName) {
     case 'colorPicker':
-      const data = context.getImageData(options.lastX, options.lastY, 1, 1).data;
-      const hsl = Convert.rgbToHsl(data[0], data[1], data[2]);
-      options.tool.toolSettings.color = `hsl(${hsl.hue}, ${hsl.saturation}%, ${hsl.lightness}%)`;
+      pickColor(options);
       break;
   }
 }
@@ -106,7 +86,6 @@ function handlePenMoving(options) {
 const Draw = {
   drawPanel,
   drawPen,
-  getMousePos,
   draw,
   handleDrawing,
   handlePenMoving

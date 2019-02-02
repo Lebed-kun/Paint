@@ -1,5 +1,6 @@
 import Draw from '../draw';
 import Convert from '../convert_units';
+import { getMousePos } from '../get_mouse_pos';
 
 function setHslProperties(options, props, drawPen) {
   // Set up options
@@ -8,7 +9,7 @@ function setHslProperties(options, props, drawPen) {
   const component = options.component;
   const colorPickerOptions = options.colorPickerOptions;
 
-  const clickCoordinates = Draw.getMousePos(canvas, colorPickerOptions.event);
+  const clickCoordinates = getMousePos(canvas, colorPickerOptions.event);
 
   // Getting hue and saturation values
   const data = canvas.getContext('2d').getImageData(clickCoordinates.x, clickCoordinates.y, 1, 1).data;

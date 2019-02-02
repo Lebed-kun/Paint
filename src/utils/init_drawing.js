@@ -1,6 +1,5 @@
 import Draw from './draw';
 import { setOptions } from './change_object';
-import Convert from './convert_units';
 
 function fillCanvas(canvas, context) {
   context.fillStyle = 'white';
@@ -15,6 +14,7 @@ export function initDrawing(options) {
   const component = options.component;
   let drawOptions = {
     isDown : false,
+    canvasDraw : canvasDraw,
     context : context,
     tool : component.props.tool
   };
@@ -29,7 +29,7 @@ export function initDrawing(options) {
       canvasPen : canvasPen,
       event : event,
       drawOptions : drawOptions,
-      extraDrawOptions : { tool : component.props.tool }
+      extraDrawOptions : { tool : component.props.tool, event : event }
     });
 
     if (drawOptions.tool.toolName == 'colorPicker')

@@ -38,6 +38,7 @@ class ToolSettings extends React.Component {
                         <option value="8px" style={{fontSize : '1rem'}}>●</option>
                         <option value="16px" style={{fontSize : '2rem'}}>●</option>
                         <option value="32px" style={{fontSize : '4rem'}}>●</option>
+                        <option value="64px" style={{fontSize : '8rem'}}>●</option>
                       </select>
                     </ToolSettingsElement>),
       fontSizeSelect : (<ToolSettingsElement key="fontSize"
